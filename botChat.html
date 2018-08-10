@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=2.0,user-scalable=yes"/>
+  <title>MobiAgent Sample</title>
+  <style>
+    body{
+      height: 100vh;
+      overflow: scroll;
+      -webkit-overflow-scrolling: touch;
+    }
+    pre{
+      overflow: scroll;
+    }
+  </style>
+</head>
+<body>
+  </br>
+  <button id='btn1' type='button'>起動</button>
+  </br>
+  <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+  <script type="text/javascript" src="https://agent.trial-mobilus.chat/assets/script/embed/current/mobi-agent-client-frame-loader.min.js"></script>
+  <script type="text/javascript" >
+
+  $(function(){
+      var query = {};
+      location.search.replace("?","").split("&").forEach(function(keyVal){var tokens = keyVal.split("="); query[tokens[0]]=tokens[1]});
+      Object.keys(MobiAgentClient.Events).forEach(function(key){
+        MobiAgentClient.on(key, function(data){
+          console.log(key, data);
+        });
+      });
+
+      $('#btn1').on('click', function(){
+        var option = {
+          location: '',
+          notificationTitle: 'もびえーじぇんとげすと',
+          notificationSoundFileUrl: 'https://agent.trial-mobilus.chat/assets/sounds/pixta_34816354.mp3'
+        };
+        MobiAgentClient.init(
+          'https://agent.trial-mobilus.chat',
+          'pnlchatbot',
+          option,
+          function(f){
+            $('#btn1').hide();
+            $("#konnect-container")
+            .append("<div id='draggableHandle' style='pointer-events: auto; cursor: move; height: 20px; width: 20px; background: rgba(34, 34, 34, 0.5); position: absolute; bottom: 1px; left: -19px;'></div>")
+            .append("<div id='frameOverlay' style='height: 100%; width: 100%; background: rgba(34, 34, 34, 0.5); position: absolute; top: 0; left: 0; display: none;'></div>")
+            .draggable({
+              handle: $("#draggableHandle"),
+              start: function() {
+                $('#frameOverlay').fadeIn('fast');
+              },
+              stop: function() {
+                $('#frameOverlay').fadeOut('fast');
+              }
+            });
+          }
+        );
+      });
+    });
+  </script>
+</body>
+</html>
