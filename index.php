@@ -30,7 +30,7 @@
   </br>
   <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-  <script type="text/javascript" src="https://mbwac.dev-mobilus.chat/assets/script/embed/current/mobi-agent-client-frame-loader.min.js"></script>
+  <script type="text/javascript" src="https://agent.trial-mobilus.chat/assets/script/embed/current/mobi-agent-client-frame-loader.min.js"></script>
   
   <script type="text/javascript" src="./embedChat.js">
     

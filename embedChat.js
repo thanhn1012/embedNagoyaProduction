@@ -11,7 +11,7 @@ $(function(){
   {
     showChatFrame();
     sentFirstMsg = true;
-    MobiAgentClient.sendMessage('');
+    MobiAgentClient.sendMessage(' ');
   });
   
   MobiAgentClient.on('roomReady', function() 
