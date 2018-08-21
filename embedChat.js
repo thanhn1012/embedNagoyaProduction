@@ -19,6 +19,11 @@ $(function(){
     MobiAgentClient.setTempField($("#userIdForBot").data("id"));
   });
 
+  
+  // 'https://mbwac.dev-mobilus.chat',
+  //  'playnexttestchatbot',
+  //  'https://agent.trial-mobilus.chat',
+  //     'pnlchatbot',
   $('#userIdForBot').on('click', function() {
     var option = {};
     MobiAgentClient.init(
@@ -26,7 +31,6 @@ $(function(){
       'pnlchatbot',
       option,
       function(f){
-        $('#btn1').hide();
         $("#konnect-container")
         .append("<div id='draggableHandle' style='pointer-events: auto; cursor: move; height: 20px; width: 20px; background: rgba(34, 34, 34, 0.5); position: absolute; bottom: 1px; left: -19px;'></div>")
         .append("<div id='frameOverlay' style='height: 100%; width: 100%; background: rgba(34, 34, 34, 0.5); position: absolute; top: 0; left: 0; display: none;'></div>")
