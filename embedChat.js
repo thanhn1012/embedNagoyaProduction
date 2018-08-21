@@ -27,8 +27,8 @@ $(function(){
   $('#userIdForBot').on('click', function() {
     var option = {};
     MobiAgentClient.init(
-      'https://agent.trial-mobilus.chat',
-      'pnlchatbot',
+      'https://mbwac.dev-mobilus.chat',
+      'nupme',
       option,
       function(f){
         $("#konnect-container")
