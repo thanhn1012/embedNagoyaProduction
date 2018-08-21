@@ -19,7 +19,7 @@ $(function(){
     MobiAgentClient.setTempField($("#userIdForBot").data("id"));
   });
 
-  $('#userIdForBot').on('click', function(){
+  $('#userIdForBot').on('click', function() {
     var option = {};
     MobiAgentClient.init(
       'https://agent.trial-mobilus.chat',
