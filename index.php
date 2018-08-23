@@ -24,9 +24,17 @@
 </head>
 <body>
   </br>
+  <?php $userId = isset($_GET["user_id"]) ? $_GET["user_id"] : 0;?>
 
-  <!-- <button id="userIdForBot" data-id="${userID}">チャット</button> -->
-  <button id="userIdForBot" data-id="029-023">起動</button>
+  
+  <?php if ($userId != 0) { ?>
+    <button id="userIdForBot" data-id="<?php echo $userId; ?>">起動</button>
+  <?php 
+    } else  {
+      echo "<h3>UserId Invalid</h3>";
+    }
+  ?>
+  
   </br>
   <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
