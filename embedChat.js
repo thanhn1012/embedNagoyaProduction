@@ -4,32 +4,12 @@ var flashCheckSpeak = true;
 var countMess = 0;
 
 $(function(){
-  var query = {};
-  location.search.replace("?","").split("&").forEach(function(keyVal){var tokens = keyVal.split("="); query[tokens[0]]=tokens[1]});
   
-  MobiAgentClient.on('sdkReady', function(data) 
-  {
-    showChatFrame();
-    sentFirstMsg = true;
-    MobiAgentClient.sendMessage(' ');
-  });
-  
-  MobiAgentClient.on('roomReady', function() 
-  {
-    MobiAgentClient.setTempField($("#userIdForBot").data("id"));
-  });
-
-  
-  // 'https://mbwac.dev-mobilus.chat',
-  //  'playnexttestchatbot',
-  //  'https://agent.trial-mobilus.chat',
-  //     'pnlchatbot',
   $('#userIdForBot').on('click', function() {
-    var option = {};
     MobiAgentClient.init(
       'https://mbwac.dev-mobilus.chat',
       'nupme',
-      option,
+      {},
       function(f){
         $("#konnect-container")
         .append("<div id='draggableHandle' style='pointer-events: auto; cursor: move; height: 20px; width: 20px; background: rgba(34, 34, 34, 0.5); position: absolute; bottom: 1px; left: -19px;'></div>")
@@ -45,22 +25,39 @@ $(function(){
         });
       }
     );
-
-    showChatFrame();
   });
 
-  MobiAgentClient.on(MobiAgentClient.Events.messageReceived, function(body, sender) 
+
+  MobiAgentClient.on('sdkReady', function(data) 
   {
-    if (body.text !="") {
-      checkToAllowSpeech(body);
-      if(allowSpeech && body.text != "Image" && body.text != "Template message")
-      {
-        speak(body.text);
-      } else {
-        console.log(body);
+    showChatFrame();
+
+    MobiAgentClient.on('openFrame', function() {
+      if(sentFirstMsg || data.hasRoom) return;
+      sentFirstMsg = true;
+      MobiAgentClient.sendMessage(' ');
+    });
+
+    MobiAgentClient.on('roomReady', function(){
+      MobiAgentClient.setTempField($("#userIdForBot").data("id"));
+    });
+
+    MobiAgentClient.on(MobiAgentClient.Events.messageReceived, function(body, sender) 
+    {
+      if (body.text !="") {
+        checkToAllowSpeech(body);
+        if(allowSpeech && body.text != "Image" && body.text != "Template message")
+        {
+          speak(body.text);
+        } else {
+          console.log(body);
+        }
       }
-    }
+    });
+
   });
+
+
 });
 
 function checkToAllowSpeech(body)
