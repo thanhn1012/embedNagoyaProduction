@@ -2,12 +2,11 @@ var sentFirstMsg = false;
 var allowSpeech = true;
 var flashCheckSpeak = true;
 var countMess = 0;
-
 $(function(){
   
   $('#userIdForBot').on('click', function() {
     MobiAgentClient.init(
-      'https://mbwac.dev-mobilus.chat',
+      'https://agent.mobilus.me',
       'nupme',
       {},
       function(f){
