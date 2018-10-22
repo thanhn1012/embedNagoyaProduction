@@ -43,17 +43,21 @@ $(function(){
 
     MobiAgentClient.on(MobiAgentClient.Events.messageReceived, function(body, sender) 
     {
-      if (body.text !="") {
+      body.text = body.text.replace(/\n/g,'');
+      if (body.text != "") {
         checkToAllowSpeech(body);
+
         if(allowSpeech && body.text != "Image" && body.text != "Template message")
-        {
-          speak(body.text);
-        } else {
-          console.log(body);
+        { 
+          sentences = body.text.split("。") ;
+          for (i = 0; i < sentences.length; i++) {
+            if (sentences[i] != "") {
+              speak(sentences[i]);
+            }
+          }
         }
       }
     });
-
   });
 
 
@@ -80,7 +84,7 @@ function checkToAllowSpeech(body)
 }
 
 function speak(text) {
-  var chunkLength = 60;
+  var chunkLength = 120;
   var pattRegex = new RegExp('^[\\s\\S]{' + Math.floor(chunkLength / 2) + ',' + chunkLength + '}[.!?,]{1}|^[\\s\\S]{1,' + chunkLength + '}$|^[\\s\\S]{1,' + chunkLength + '} ');
   let voices = window.speechSynthesis.getVoices();
   var arr = [];
