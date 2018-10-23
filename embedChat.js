@@ -96,7 +96,7 @@ function speak(text) {
     var msg = new SpeechSynthesisUtterance(this.trim());
     msg.voice = voices[57]; // 57: Google 日本語
     msg.volume = parseFloat(1.0); // 音量 min 0 ~ max 1
-    msg.rate = parseFloat(1.0); // 速度 min 0 ~ max 10
+    msg.rate = parseFloat(1.2); // 速度 min 0 ~ max 10
     msg.pitch = parseFloat(1.0); // 音程 min 0 ~ max 2
     msg.lang = 'ja-JP';
     window.speechSynthesis.speak(msg);
