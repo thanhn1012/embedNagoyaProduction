@@ -49,11 +49,18 @@ $(function(){
 
         if(allowSpeech && body.text != "Image" && body.text != "Template message")
         { 
-          sentences = body.text.split("。") ;
-          for (i = 0; i < sentences.length; i++) {
-            if (sentences[i] != "") {
-              speak(sentences[i]);
+          var lastQueue = localStorage.getItem("last_queue");
+
+          if (body.text != lastQueue) {
+            localStorage.setItem("last_queue", body.text);
+            
+            sentences = body.text.split("。") ;
+            for (i = 0; i < sentences.length; i++) {
+              if (sentences[i] != "") {
+                speak(sentences[i]);
+              }
             }
+
           }
         }
       }
@@ -84,7 +91,7 @@ function checkToAllowSpeech(body)
 }
 
 function speak(text) {
-  var chunkLength = 120;
+  var chunkLength = 200;
   var pattRegex = new RegExp('^[\\s\\S]{' + Math.floor(chunkLength / 2) + ',' + chunkLength + '}[.!?,]{1}|^[\\s\\S]{1,' + chunkLength + '}$|^[\\s\\S]{1,' + chunkLength + '} ');
   let voices = window.speechSynthesis.getVoices();
   var arr = [];
